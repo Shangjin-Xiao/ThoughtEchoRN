@@ -1,97 +1,183 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# ThoughtEcho - React Native Notes App
 
-# Getting Started
+A complete React Native notes application with SQLite database, cross-platform support, and automated CI/CD.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- ✅ **Cross-Platform**: iOS and Android support
+- ✅ **SQLite Database**: Local storage with full CRUD operations
+- ✅ **Modern UI**: Clean, intuitive interface with Material Design principles
+- ✅ **TypeScript**: Full type safety and better development experience
+- ✅ **Navigation**: React Navigation with stack navigator
+- ✅ **Testing**: Jest testing framework with coverage
+- ✅ **CI/CD**: GitHub Actions automation
+- ✅ **Code Quality**: ESLint and Prettier configuration
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+*Screenshots will be added once the app is built and tested.*
 
-```sh
-# Using npm
-npm start
+## Architecture
 
-# OR using Yarn
-yarn start
+```
+src/
+├── components/          # Reusable UI components
+├── database/           # SQLite database layer
+├── screens/            # Application screens
+├── styles/             # Global styles and themes
+├── types/              # TypeScript type definitions
+└── utils/              # Utility functions
 ```
 
-## Step 2: Build and run your app
+## Getting Started
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Prerequisites
 
-### Android
+- Node.js (>= 18.0.0)
+- React Native CLI
+- Android Studio (for Android development)
+- Xcode (for iOS development)
 
-```sh
-# Using npm
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Shangjin-Xiao/ThoughtEchoRN.git
+cd ThoughtEchoRN
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. For iOS, install CocoaPods dependencies:
+```bash
+cd ios && pod install && cd ..
+```
+
+### Running the Application
+
+#### Android
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+#### iOS
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+#### Development Server
+```bash
+npm start
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Testing
 
-## Step 3: Modify your app
+Run all tests:
+```bash
+npm test
+```
 
-Now that you have successfully run the app, let's make changes!
+Run tests with coverage:
+```bash
+npm run test:coverage
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+TypeScript type checking:
+```bash
+npm run typecheck
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Linting:
+```bash
+npm run lint
+```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Building for Production
 
-## Congratulations! :tada:
+### Android APK
+```bash
+npm run build:android
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+### iOS Archive
+Build through Xcode or use the CI/CD pipeline.
 
-### Now what?
+## Database Schema
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+The application uses SQLite with the following schema:
 
-# Troubleshooting
+```sql
+CREATE TABLE notes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## API Reference
 
-# Learn More
+### DatabaseManager
 
-To learn more about React Native, take a look at the following resources:
+The `DatabaseManager` class provides the following methods:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- `initDatabase()`: Initialize the SQLite database
+- `createNote(noteData)`: Create a new note
+- `getAllNotes()`: Retrieve all notes
+- `getNoteById(id)`: Get a specific note by ID
+- `updateNote(noteData)`: Update an existing note
+- `deleteNote(id)`: Delete a note by ID
+- `closeDatabase()`: Close the database connection
+
+## CI/CD Pipeline
+
+The project includes a comprehensive GitHub Actions workflow that:
+
+1. **Lints and Tests**: Runs ESLint, TypeScript checks, and Jest tests
+2. **Builds Android**: Generates release APK
+3. **Builds iOS**: Creates iOS archive
+4. **Auto-Commits**: Commits successful build status
+5. **Notifications**: Provides build status updates
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Performance Considerations
+
+- SQLite operations are optimized for mobile performance
+- Navigation uses lazy loading for screens
+- Image and asset optimization
+- Memory management for large note lists
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Metro bundler issues**: Run `npm start -- --reset-cache`
+2. **Android build fails**: Clean the build with `npm run clean`
+3. **iOS pod install fails**: Update CocoaPods and retry
+4. **Database issues**: Check file permissions and storage availability
+
+### Debug Mode
+
+Enable debug mode by setting `SQLite.DEBUG(true)` in `DatabaseManager.ts`.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- React Native team for the excellent framework
+- SQLite for reliable local storage
+- React Navigation for smooth navigation experience
+- The open-source community for various libraries used

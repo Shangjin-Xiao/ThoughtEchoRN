@@ -16,7 +16,7 @@ import { colors } from './src/styles/globalStyles';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   useEffect(() => {
     initializeApp();
   }, []);
@@ -58,7 +58,6 @@ function App(): JSX.Element {
           component={NoteEditorScreen}
           options={{
             title: 'Note',
-            headerBackTitleVisible: false,
           }}
         />
       </Stack.Navigator>
